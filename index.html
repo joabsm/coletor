@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="icon" href="https://www.cpdverificationservice.com/uploads/1/2/6/8/126857925/cropped-cpd-logo-clear-1.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COLETORES</title>
+    <!-- Adicione seus estilos aqui -->
+    <!-- Inclua o SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+    <!-- Seu conteúdo aqui -->
+    <form id="meuFormulario" method="post" action="https://api.sheetmonkey.io/form/3LYYTQDqgosfg2vzMwknPe" autoComplete="on" class="sm__form">
+    <div style="text-align: center;">
+    <h1 style="margin-top: 0;">FORMULARIO</h1>
+    <div style="display: inline-block;">
+        <img src="https://www.cpdverificationservice.com/uploads/1/2/6/8/126857925/cropped-cpd-logo-clear-1.png" alt="Imagem Esquerda" style="width: 30px; vertical-align: middle;">
+        <img src="https://th.bing.com/th/id/OIP.4_0uKSoH3TVHiUOmbfafCgHaD4?rs=1&pid=ImgDetMain" alt="Imagem Direita" style="width: 80px; vertical-align: middle;">
+    </div>
+</div>
+ <h4>Ao selecionar "Retirada",apos enviar este formulario você assume total responsabilidade sobre o coletor.</h4>
+        <div class="sm-branding-footer">
+            <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termos</a>
+        </div>
+        <div class="sm__form__fields">
+            <label for="full_name">Nome Completo: *</label>
+            <input type="text" id="full_name" name="full_name" required>
+
+            <label for="setor">Selecione Setor: *</label>
+            <select id="setor" name="setor" required>
+                <option value="">-- Selecione --</option>
+                <option value="Deposito">Deposito</option>
+                <option value="Auditoria">Auditoria</option>
+                <option value="Prevencao_de_perdas">Prevenção de perdas</option>
+            </select>
+
+            <label for="coletor">Selecione numero do coletor: *</label>
+            <select id="coletor" name="coletor" required>
+                <option value="">-- Selecione --</option>
+                <option value="Coletor01">Coletor- 01</option>
+                <option value="Coletor02">Coletor- 02</option>
+                <option value="Coletor03">Coletor- 03</option>
+                <option value="Coletor04">Coletor- 04</option>
+                <option value="Coletor05">Coletor- 05</option>
+                <option value="Coletor06">Coletor- 06</option>
+                <option value="Coletor07">Coletor- 07</option>
+                <option value="Coletor08">Coletor- 08</option>
+                <option value="Coletor09">Coletor- 09</option>
+                <option value="Coletor10">Coletor- 10</option>
+                <option value="Coletor11">Coletor- 11</option>
+                <option value="Coletor12">Coletor- 12</option>
+                <option value="Coletor13">Coletor- 13</option>
+                <option value="Coletor14">Coletor- 14</option>
+                <option value="Coletor15">Coletor- 15</option>
+                <option value="Coletor16">Coletor- 16</option>
+                <option value="Coletor17">Coletor- 17</option>
+                <option value="Coletor18">Coletor- 18</option>
+                <option value="Coletor19">Coletor- 19</option>
+
+            </select>
+            <label for="retirada_devolucao">Selecione Retirada ou Devolução: *</label>
+            <select id="retirada_devolucao" name="retirada_devolucao" required>
+                <option value="">-- Selecione --</option>
+                <option value="Deposito">Retirada</option>
+                <option value="Auditoria">Devolução</option>
+            </select>
+
+            <fieldset>
+                <legend>Marque as caixas como Ok:</legend>
+                <div class="checkbox-group">
+                <input type="checkbox" id="select_all" onclick="toggleCheckboxes(this)" />
+                <label for="select_all">Marcar Todas</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="scanner" name="features" value="Scanner" />
+                    <label for="scanner">Scanner</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="touch_screen" name="features" value="Touch-screen" />
+                    <label for="touch_screen">Touch-screen</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="bateria" name="features" value="Bateria" />
+                    <label for="bateria">Bateria</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="capa" name="features" value="Capa" />
+                    <label for="capa">Capa</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="teclado" name="features" value="Teclado" />
+                    <label for="teclado">teclado</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="alça" name="features" value="Alça" />
+                    <label for="alça">Alça</label>
+                </div>
+            </fieldset>
+        </div>
+       
+        <div class="sm-actions__container">
+    <a href="https://joabsm.github.io/suportecpd/" class="sm-btn sm-btn--support">Suporte</a>
+    <button type="submit" class="sm-btn sm-btn--primary">Enviar</button>
+</div>
+
+        
+    </form>
+<script src="script.js"></script>
+</body>
+</html>
