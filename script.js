@@ -56,7 +56,7 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
        
         
 function toggleCheckboxes(checkbox) {
-        var checkboxes = document.getElementsByName('features');
+        var checkboxes = document.getElementsByName('informações');
         for (var i = 0, n = checkboxes.length; i < n; i++) {
             checkboxes[i].checked = checkbox.checked;
         }
