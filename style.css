@@ -90,6 +90,13 @@
         border-radius: 5px;
         background-color: #f8f8f8;
     }
+select#cpd_responsavel{
+        padding: 5px;
+        margin-bottom: 10px; /* Espaço entre a caixa de seleção e as checkboxes */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+}
     select#coletor {
         padding: 5px;
         margin-bottom: 10px; /* Espaço entre a caixa de seleção e as checkboxes */
