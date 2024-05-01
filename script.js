@@ -44,6 +44,7 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
     }).then(response => {
         if (response.ok) {
             console.log('Dados enviados com sucesso!');
+                    window.location.reload();
         } else {
             Swal.fire("Houve um erro ao enviar o formulário", "", "error");
         }
