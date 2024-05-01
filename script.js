@@ -36,6 +36,8 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
         showConfirmButton: false,
         timer: 2000
     });
+            var nomeCompleto = document.getElementById('nome_completo').value;
+    localStorage.setItem('nomeCompleto', nomeCompleto);
 
     // Envia os dados do formulário usando fetch
     fetch(this.action, {
@@ -53,7 +55,15 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
             Swal.fire("Houve um erro ao enviar o formulário", "", "error");
         });
 });
-
+// Quando a página é recarregada, verifica se há um nome completo armazenado e, se houver, insere-o de volta no formulário
+window.onload = function() {
+    var nomeCompletoSalvo = localStorage.getItem('nomeCompleto');
+    if (nomeCompletoSalvo) {
+        document.getElementById('nome_completo').value = nomeCompletoSalvo;
+        // Limpa o nome completo de localStorage se não quiser mantê-lo após o recarregamento
+        localStorage.removeItem('nomeCompleto');
+    }
+};
        
         
 function toggleCheckboxes(checkbox) {
