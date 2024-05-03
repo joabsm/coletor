@@ -54,9 +54,6 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
             Swal.fire("Houve um erro ao enviar o formulário", "", "error");
         });
 
-
-
-
  // Prepara os dados do formulário para serem enviados
   var formData = new FormData(this);
   var dados = {
