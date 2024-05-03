@@ -8,7 +8,6 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
         e.preventDefault(); // Impede o envio do formulário apenas se nenhuma caixa estiver marcada
         return false;
     }
-
     // Cria um elemento de entrada oculto para a data e hora atual
     var currentDateTimeInput = document.createElement('input');
     currentDateTimeInput.setAttribute('type', 'hidden');
