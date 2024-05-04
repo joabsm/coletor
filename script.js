@@ -169,6 +169,35 @@ function toggleCheckboxes(checkbox) {
             checkboxes[i].checked = checkbox.checked;
         }
     }
+
+function comprimirImagem(file, qualidade) {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = event => {
+    const imgElement = document.createElement('img');
+    imgElement.src = event.target.result;
+    imgElement.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = imgElement.width;
+      canvas.height = imgElement.height;
+      ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+      ctx.canvas.toBlob((blob) => {
+        const novoArquivo = new File([blob], file.name, {
+          type: 'image/jpeg',
+          lastModified: Date.now()
+        });
+        // Agora você tem um novo arquivo de imagem comprimido que pode ser enviado para o Telegram
+      }, 'image/jpeg', qualidade);
+    };
+  };
+}
+
+// Exemplo de uso:
+// document.getElementById('inputFoto').files[0] é o arquivo de imagem original
+// 0.75 é a qualidade para a compressão, onde 1 é a qualidade máxima e 0 é a mínima
+comprimirImagem(document.getElementById('inputFoto').files[0], 0.75);
+
     
 
 
