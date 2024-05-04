@@ -57,7 +57,7 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
 
 
 
- // Prepara os dados do formulário para serem enviados
+  // Prepara os dados do formulário para serem enviados
   var formData = new FormData(this);
   var dados = {
     nome_completo: formData.get('nome_completo'),
@@ -68,88 +68,43 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
   };
 
   // Função para enviar dados do formulário para o bot do Telegram
-  function enviarDadosParaTelegram(dados, fotoBlob) {
-    const token = '6594333490:AAHpJBSmR4eb5iDRgeYA9HfyHj0f-l70JDg'; // Substitua pelo seu token do bot
-    const chatId = '-1001720604244'; // Substitua pelo ID do chat do grupo
+  function enviarDadosParaTelegram(dados) {
+    const token = '6975084416:AAHXNd9tJQpg_1dJfmM5k8DLwbG-8gVzUh0'; // Substitua pelo seu token do bot
+    const chatId = '-1001346768338'; // Substitua pelo ID do chat do grupo
 
     // Formata a mensagem conforme o padrão desejado
     const statusColetor = dados.retirada_devolucao === 'Retirado' ? 'foi Retirado 🟠' : 'foi Devolvido ✅';
-    const mensagem = `> ${dados.coletor} ${statusColetor}\n\nNome completo: ${dados.nome_completo}\nSetor:  ${dados.setor}\nCPD Responsável: ${dados.cpd_responsavel}`;
+  const mensagem = `> ${dados.coletor} ${statusColetor}\n\nNome completo: ${dados.nome_completo}\nSetor:  ${dados.setor}\nCPD Responsável: ${dados.cpd_responsavel}`;
 
-    // Se uma foto foi fornecida, envie-a junto com a mensagem
-    if (fotoBlob) {
-      // Prepara os dados para enviar a foto
-      const formDataFoto = new FormData();
-      formDataFoto.append('chat_id', chatId);
-      formDataFoto.append('photo', fotoBlob);
-      formDataFoto.append('caption', mensagem);
+    // Endpoint da API do Telegram para enviar mensagens
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
-      // Endpoint da API do Telegram para enviar fotos
-      const urlFoto = `https://api.telegram.org/bot${token}/sendPhoto`;
+    // Dados para enviar na requisição
+    const data = {
+      chat_id: chatId,
+      text: mensagem
+    };
 
-      // Envia a foto para o grupo do Telegram
-      fetch(urlFoto, {
-        method: 'POST',
-        body: formDataFoto
-      })
-      .then(response => response.json())
-      .then(data => console.log('Foto enviada com sucesso:', data))
-      .catch(error => console.error('Erro ao enviar foto:', error));
-    } else {
-      // Se não houver foto, envie apenas a mensagem
-      const data = {
-        chat_id: chatId,
-        text: mensagem
-      };
-
-      // Endpoint da API do Telegram para enviar mensagens
-      const urlMensagem = `https://api.telegram.org/bot${token}/sendMessage`;
-
-      // Envia a mensagem para o grupo do Telegram
-      fetch(urlMensagem, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.json())
-      .then(data => console.log('Mensagem enviada com sucesso:', data))
-      .catch(error => console.error('Erro ao enviar mensagem:', error));
-    }
+    // Envia a mensagem para o grupo do Telegram
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log('Mensagem enviada com sucesso:', data))
+    .catch(error => console.error('Erro ao enviar mensagem:', error));
   }
 
-  // Captura a foto, se disponível
-  var inputFoto = document.getElementById('inputFoto');
-  var fotoBlob = inputFoto && inputFoto.files.length > 0 ? inputFoto.files[0] : null;
 
-  // Chama a função para enviar os dados e a foto para o Telegram
-  enviarDadosParaTelegram(dados, fotoBlob);
+  // Chama a função para enviar os dados para o Telegram
+  enviarDadosParaTelegram(dados);
 
 
 
 });
-
-// Função para verificar se a opção "Sem Cpd" foi selecionada e mostrar o botão de foto
-function verificarOpcaoSemCpd(valor) {
-  // Verifica se o valor selecionado é "Sem_cpd"
-  if (valor === 'Sem_cpd') {
-    // Mostra o botão de foto
-    document.getElementById('botaoFoto').style.display = 'block';
-  } else {
-    // Esconde o botão de foto
-    document.getElementById('botaoFoto').style.display = 'none';
-  }
-}
-
-// Certifique-se de que esta função está sendo chamada corretamente no evento onchange do select
-document.getElementById('cpd_responsavel').onchange = function() {
-  verificarOpcaoSemCpd(this.value);
-};
-
-
-
-
 
 
 // Quando a página é recarregada, verifica se há um nome completo armazenado e, se houver, insere-o de volta no formulário
@@ -169,36 +124,10 @@ function toggleCheckboxes(checkbox) {
             checkboxes[i].checked = checkbox.checked;
         }
     }
-
-function comprimirImagem(file, qualidade) {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = event => {
-    const imgElement = document.createElement('img');
-    imgElement.src = event.target.result;
-    imgElement.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = imgElement.width;
-      canvas.height = imgElement.height;
-      ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-      ctx.canvas.toBlob((blob) => {
-        const novoArquivo = new File([blob], file.name, {
-          type: 'image/jpeg',
-          lastModified: Date.now()
-        });
-        // Agora você tem um novo arquivo de imagem comprimido que pode ser enviado para o Telegram
-      }, 'image/jpeg', qualidade);
-    };
-  };
-}
-
-// Exemplo de uso:
-// document.getElementById('inputFoto').files[0] é o arquivo de imagem original
-// 0.75 é a qualidade para a compressão, onde 1 é a qualidade máxima e 0 é a mínima
-comprimirImagem(document.getElementById('inputFoto').files[0], 0.75);
-
     
 
-
+// Certifique-se de que esta função está sendo chamada corretamente no evento onchange do select
+document.getElementById('cpd_responsavel').onchange = function() {
+  verificarOpcaoSemCpd(this.value);
+};
     
