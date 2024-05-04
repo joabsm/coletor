@@ -131,26 +131,3 @@ select#cpd_responsavel{
   text-align: center;
   margin-bottom: 10px;
 }
- #botaoFoto {
-            display: none;
-            background-color: #0074D9;
-            color: #FFFFFF;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-         #botaoFoto:hover {
-            background-color: #005689;
-        }
-        /* Estilo para o input de foto */
-        #inputFoto {
-            /* Adicione estilos personalizados aqui */
-            border: 2px solid #CCCCCC;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 14px;
-            width: 100%;
-        }
