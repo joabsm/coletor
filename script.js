@@ -126,8 +126,5 @@ function toggleCheckboxes(checkbox) {
     }
     
 
-// Certifique-se de que esta função está sendo chamada corretamente no evento onchange do select
-document.getElementById('cpd_responsavel').onchange = function() {
-  verificarOpcaoSemCpd(this.value);
-};
+
     
