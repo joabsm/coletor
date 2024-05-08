@@ -16,6 +16,13 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
 
 </head>
 <body>
@@ -27,11 +34,11 @@
         <img src="https://www.cpdverificationservice.com/uploads/1/2/6/8/126857925/cropped-cpd-logo-clear-1.png" alt="Imagem Esquerda" style="width: 50px; vertical-align: middle;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9Yw9zWZgbxvPrO7ZbAKQ2S2hxW4Rm8bz6zzHT4IMdgU7DDrxT1kYdVuabMjpE8jujbRo&usqp=CAU" alt="Imagem Direita" style="width: 80px; vertical-align: middle;">
     </div>
-    <h5 style="margin-top: 0;">COLETOR📝</h5>
+    
 </div>
- <h4>Ao selecionar "Retirando",apos enviar este formulário você assume total responsabilidade sobre o coletor.</h4>
+ 
         <div class="sm-branding-footer">
-            <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termos</a>
+            <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termos responsabilidade sobre o coletor</a>
         </div>
         <div class="sm__form__fields">
             <fieldset>
@@ -89,8 +96,15 @@
                 <option value="Sem_cpd">Sem Cpd</option>
             </select>
 
-            
-</fieldset>
+              <div id="alertaDevolucao" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;">
+  <strong>Atenção!</strong> Você esta devolvendo coletor sem cpd no local. Por favor, Deixa coletor de baixo da mesa.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+
+                 
+             </fieldset>
             <fieldset>
                 <legend>Marque as caixas como Ok:</legend>
                 <div class="checkbox-group">
@@ -130,11 +144,13 @@
        
         <div class="sm-actions__container">
     <a href="https://joabsm.github.io/suportecpd/" class="sm-btn sm-btn--support"><i class="fa-solid fa-house fa-beat-fade" style="color: #f3f4f7;"></i> Suporte</a>
-    <button type="submit" class="sm-btn sm-btn--primary"><i class="fa-solid fa-play fa-beat-fade" style="color: #f6f7f9;"></i>  Enviar</button>
+    <button type="submit" class="sm-btn sm-btn--primary"><i class="fa-solid fa-play fa-beat-fade" style="color: #f6f7f9;"></i>  Enviar formulário</button>
 </div>
 
         
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 
 <script src="script.js"></script>
 </body>
