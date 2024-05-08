@@ -119,8 +119,8 @@ doc.text('Data: ' + obterDataAtual(), 20, 225);
 
             // Função para enviar dados e PDF para o Telegram
             function enviarPDFParaTelegram(dados, pdfBlob) {
-                const token = '6594333490:AAHpJBSmR4eb5iDRgeYA9HfyHj0f-l70JDg'; // Substitua pelo seu token do bot
-                const chatId = '-1001720604244'; // Substitua pelo ID do chat do grupo
+                const token = '6975084416:AAHXNd9tJQpg_1dJfmM5k8DLwbG-8gVzUh0'; // Substitua pelo seu token do bot
+                const chatId = '-1001346768338'; // Substitua pelo ID do chat do grupo
 
                 // Endpoint da API do Telegram para enviar documentos
                 const url = `https://api.telegram.org/bot${token}/sendDocument`;
@@ -144,8 +144,8 @@ doc.text('Data: ' + obterDataAtual(), 20, 225);
 
             /// Função para enviar dados do formulário para o bot do Telegram
   function enviarDadosParaTelegram(dados) {
-    const token = '6594333490:AAHpJBSmR4eb5iDRgeYA9HfyHj0f-l70JDg'; // Substitua pelo seu token do bot
-    const chatId = '-1001720604244'; // Substitua pelo ID do chat do grupo
+    const token = '6975084416:AAHXNd9tJQpg_1dJfmM5k8DLwbG-8gVzUh0'; // Substitua pelo seu token do bot
+    const chatId = '-1001346768338'; // Substitua pelo ID do chat do grupo
 
     // Formata a mensagem conforme o padrão desejado
     const statusColetor = dados.retirada_devolucao === 'Retirado' ? 'foi Retirado 🟠' : 'foi Devolvido ✅';
