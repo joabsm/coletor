@@ -65,8 +65,6 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
 
 
 
-
-
   // Função para gerar o PDF
             function gerarPDF(dados) {
                 const { jsPDF } = window.jspdf;
