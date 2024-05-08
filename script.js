@@ -38,6 +38,15 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
             var nomeCompleto = document.getElementById('nome_completo').value;
     localStorage.setItem('nomeCompleto', nomeCompleto);
 
+    var setor = document.getElementById('setor').value;
+    localStorage.setItem('setor', setor);
+
+   
+
+    var cpd_responsavel = document.getElementById('cpd_responsavel').value;
+    localStorage.setItem('cpd_responsavel', cpd_responsavel);
+
+
     // Envia os dados do formulário usando fetch
     fetch(this.action, {
         method: 'POST',
@@ -57,24 +66,92 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
 
 
 
-  // Prepara os dados do formulário para serem enviados
-  var formData = new FormData(this);
-  var dados = {
-    nome_completo: formData.get('nome_completo'),
-    setor: formData.get('setor'),
-    coletor: formData.get('coletor'),
-    retirada_devolucao: formData.get('retirada_devolucao'),
-    cpd_responsavel: formData.get('cpd_responsavel')
-  };
 
-  // Função para enviar dados do formulário para o bot do Telegram
+  // Função para gerar o PDF
+            function gerarPDF(dados) {
+                const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Adiciona o logo da empresa (substitua 'LOGO_BASE64_OU_URL' pelo seu logo)
+  doc.addImage('LOGO_BASE64_OU_URL', 'JPEG', 15, 15, 50, 50);
+
+  // Adiciona o texto do termo de responsabilidade
+  doc.setFontSize(11);
+  doc.text('Termo de Responsabilidade', 20, 80);
+  doc.text('Mediante estes termos,', 20, 90);
+  doc.text(document.getElementById('nome_completo').value + ' declara que recebeu e', 20, 100);
+  doc.text(20, 110, 'responsabiliza-se pelo uso e conservação do equipamento "Coletor Motorola e Zebra",');
+  doc.text(20, 120, 'de propriedade de Mateus Supermercado LTDA – Filial 04-Goiás,');
+  doc.text(20, 130, 'pelo prazo de expediente, a contar desta data, e comprometendo-se a devolvê-lo(s)');
+  doc.text(20, 140, 'em estado atual até o fim deste prazo.');
+  doc.text('Setor: ' + document.getElementById('setor').value, 20, 150);
+  doc.text(20, 160, 'Número Coletor: ' + document.getElementById('coletor').value);
+  doc.text(20, 170, 'Retirando ou Devolvendo: ' + document.getElementById('retirada_devolucao').value);
+  doc.text(20, 180, 'CPD Responsável: ' + document.getElementById('cpd_responsavel').value);
+  var equipamentos = document.querySelectorAll('input[name="informações"]:checked');
+  var listaEquipamentos = [];
+  equipamentos.forEach(function(equipamento) {
+    listaEquipamentos.push(equipamento.value);
+  });
+  doc.text('Equipamentos:', 20, 190);
+  doc.text(listaEquipamentos.join(', '), 20, 200);
+
+  // Adiciona a linha para assinatura
+  doc.text('Assinatura do Colaborador:', 20, 210);
+   doc.text(document.getElementById('nome_completo').value, 20, 214);
+
+  doc.line(20, 215, 190, 215);
+
+  // Adiciona a data
+  doc.text('Data: ', 20, 225);
+doc.text('Data: ' + obterDataAtual(), 20, 225);
+  // Salva o PDF
+  doc.save('termo_responsabilidade.pdf');
+
+  function obterDataAtual() {
+  const data = new Date();
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa em 0 (janeiro = 0)
+  const ano = data.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+}
+                // Retorna o PDF como Blob
+                return doc.output('blob');
+            }
+
+            // Função para enviar dados e PDF para o Telegram
+            function enviarPDFParaTelegram(dados, pdfBlob) {
+                const token = '6594333490:AAHpJBSmR4eb5iDRgeYA9HfyHj0f-l70JDg'; // Substitua pelo seu token do bot
+                const chatId = '-1001720604244'; // Substitua pelo ID do chat do grupo
+
+                // Endpoint da API do Telegram para enviar documentos
+                const url = `https://api.telegram.org/bot${token}/sendDocument`;
+
+                // Cria um formulário para enviar os dados e o arquivo
+                let formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('document', pdfBlob, 'termo_responsabilidade.pdf');
+                formData.append('caption', `> ${dados.coletor} foi ${dados.retirada_devolucao}🟠\n\nNome: ${dados.nome_completo}\nSetor: ${dados.setor}\nCPD Responsável: ${dados.cpd_responsavel}`);
+
+           
+                // Envia a mensagem e o PDF para o Telegram
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => console.log('Mensagem e PDF enviados com sucesso:', data))
+                .catch(error => console.error('Erro ao enviar mensagem e PDF:', error));
+            }
+
+            /// Função para enviar dados do formulário para o bot do Telegram
   function enviarDadosParaTelegram(dados) {
-    const token = '6975084416:AAHXNd9tJQpg_1dJfmM5k8DLwbG-8gVzUh0'; // Substitua pelo seu token do bot
-    const chatId = '-1001346768338'; // Substitua pelo ID do chat do grupo
+    const token = '6594333490:AAHpJBSmR4eb5iDRgeYA9HfyHj0f-l70JDg'; // Substitua pelo seu token do bot
+    const chatId = '-1001720604244'; // Substitua pelo ID do chat do grupo
 
     // Formata a mensagem conforme o padrão desejado
     const statusColetor = dados.retirada_devolucao === 'Retirado' ? 'foi Retirado 🟠' : 'foi Devolvido ✅';
-  const mensagem = `> ${dados.coletor} ${statusColetor}\n\nNome completo: ${dados.nome_completo}\nSetor:  ${dados.setor}\nCPD Responsável: ${dados.cpd_responsavel}`;
+  const mensagem = `> ${dados.coletor} ${statusColetor}\n\nNome: ${dados.nome_completo}\nSetor:  ${dados.setor}\nCPD Responsável: ${dados.cpd_responsavel}`;
 
     // Endpoint da API do Telegram para enviar mensagens
     const url = `https://api.telegram.org/bot${token}/sendMessage`;
@@ -97,12 +174,40 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
     .then(data => console.log('Mensagem enviada com sucesso:', data))
     .catch(error => console.error('Erro ao enviar mensagem:', error));
   }
+ // Coleta os dados do formulário
+            let dadosFormulario = {
+                nome_completo: document.getElementById('nome_completo').value,
+        setor: document.getElementById('setor').value,
+         coletor: document.getElementById('coletor').value,
+         retirada_devolucao: document.getElementById('retirada_devolucao').value,
+         cpd_responsavel: document.getElementById('cpd_responsavel').value
+        };
+
+        var formData = new FormData(this);
+  var dados = {
+    nome_completo: formData.get('nome_completo'),
+    setor: formData.get('setor'),
+    coletor: formData.get('coletor'),
+    retirada_devolucao: formData.get('retirada_devolucao'),
+    cpd_responsavel: formData.get('cpd_responsavel')
+  };
 
 
-  // Chama a função para enviar os dados para o Telegram
-  enviarDadosParaTelegram(dados);
+    // Verifica se o cliente selecionou "Retirando" para gerar e enviar o PDF
+    if (dadosFormulario.retirada_devolucao === 'Retirado') {
 
+        // Gera o PDF
+        let pdfBlob = gerarPDF(dadosFormulario);
 
+        // Envia o PDF para o Telegram
+        enviarPDFParaTelegram(dadosFormulario, pdfBlob);
+    }
+    if (dadosFormulario.retirada_devolucao === 'Devolvido') {
+       // Sempre envia os dados para o Telegram
+    enviarDadosParaTelegram(dados);
+    }
+
+         
 
 });
 
@@ -110,12 +215,31 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
 // Quando a página é recarregada, verifica se há um nome completo armazenado e, se houver, insere-o de volta no formulário
 window.onload = function() {
     var nomeCompletoSalvo = localStorage.getItem('nomeCompleto');
+    var nomeSetorSalvo = localStorage.getItem('setor');
+    
+    var nomeCpdResponsavelSalvo = localStorage.getItem('cpd_responsavel');
+
     if (nomeCompletoSalvo) {
         document.getElementById('nome_completo').value = nomeCompletoSalvo;
         // Limpa o nome completo de localStorage se não quiser mantê-lo após o recarregamento
         localStorage.removeItem('nomeCompleto');
     }
+     if (nomeSetorSalvo) {
+        document.getElementById('setor').value = nomeSetorSalvo;
+        // Limpa o nome completo de localStorage se não quiser mantê-lo após o recarregamento
+        localStorage.removeItem('setor');
+    }
+     
+     if (nomeCpdResponsavelSalvo) {
+        document.getElementById('cpd_responsavel').value = nomeCpdResponsavelSalvo;
+        // Limpa o nome completo de localStorage se não quiser mantê-lo após o recarregamento
+        localStorage.removeItem('cpd_responsavel');
+    }
 };
+
+     
+
+
        
         
 function toggleCheckboxes(checkbox) {
@@ -127,4 +251,26 @@ function toggleCheckboxes(checkbox) {
     
 
 
-    
+  // Função para verificar as seleções e exibir o alerta
+function verificarSelecoes() {
+  var retiradaDevolucao = document.getElementById('retirada_devolucao').value;
+  var cpdResponsavel = document.getElementById('cpd_responsavel').value;
+  
+  // Verifica se as opções 'Devolvido' e 'Sem_cpd' foram selecionadas
+  if (retiradaDevolucao === 'Devolvido' && cpdResponsavel === 'Sem_cpd') {
+    // Exibe o alerta
+    var alerta = document.getElementById('alertaDevolucao');
+    alerta.style.display = 'block';
+  } else {
+    // Esconde o alerta
+    var alerta = document.getElementById('alertaDevolucao');
+    alerta.style.display = 'none';
+  }
+}
+
+// Adiciona o evento de mudança aos selects para chamar a função verificarSelecoes
+document.getElementById('retirada_devolucao').addEventListener('change', verificarSelecoes);
+document.getElementById('cpd_responsavel').addEventListener('change', verificarSelecoes);
+
+
+
