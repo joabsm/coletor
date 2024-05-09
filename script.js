@@ -65,6 +65,8 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
 
 
 
+
+
   // Função para gerar o PDF
             function gerarPDF(dados) {
                 const { jsPDF } = window.jspdf;
@@ -205,40 +207,53 @@ doc.text('Data: ' + obterDataAtual(), 20, 225);
     enviarDadosParaTelegram(dados);
     }
 
+
+
          
 
 });
 
-
-// Quando a página é recarregada, verifica se há um nome completo armazenado e, se houver, insere-o de volta no formulário
 window.onload = function() {
+    exibirAvisoPorMinuto(); // Chama a função do aviso
+
+    // Seu código existente para verificar e inserir valores salvos
     var nomeCompletoSalvo = localStorage.getItem('nomeCompleto');
     var nomeSetorSalvo = localStorage.getItem('setor');
-    
     var nomeCpdResponsavelSalvo = localStorage.getItem('cpd_responsavel');
 
     if (nomeCompletoSalvo) {
         document.getElementById('nome_completo').value = nomeCompletoSalvo;
-        // Limpa o nome completo de localStorage se não quiser mantê-lo após o recarregamento
         localStorage.removeItem('nomeCompleto');
     }
-     if (nomeSetorSalvo) {
+    if (nomeSetorSalvo) {
         document.getElementById('setor').value = nomeSetorSalvo;
-        // Limpa o nome completo de localStorage se não quiser mantê-lo após o recarregamento
         localStorage.removeItem('setor');
     }
-     
-     if (nomeCpdResponsavelSalvo) {
+    if (nomeCpdResponsavelSalvo) {
         document.getElementById('cpd_responsavel').value = nomeCpdResponsavelSalvo;
-        // Limpa o nome completo de localStorage se não quiser mantê-lo após o recarregamento
         localStorage.removeItem('cpd_responsavel');
     }
 };
 
-     
+function exibirAvisoPorMinuto() {
+    // Sua lógica para exibir o aviso
+    var agora = new Date().getTime();
+      var ultimoAviso = localStorage.getItem('ultimoAviso');
 
+      // Se o último aviso não foi definido ou se já passou um dia, exiba o aviso
+      if (!ultimoAviso || agora - ultimoAviso >= 24 * 60 * 60 * 1000) {
+        Swal.fire({
+          title: 'Aviso Importante!',
+          text: 'Por favor, preencha o formulário na retirada e na devolução do coletor.',
+          icon: 'info',
+          confirmButtonText: 'Ok'
+        });
 
-       
+        // Atualiza o horário do último aviso no localStorage
+        localStorage.setItem('ultimoAviso', agora);
+      }
+}
+   
         
 function toggleCheckboxes(checkbox) {
         var checkboxes = document.getElementsByName('informações');
@@ -269,6 +284,4 @@ function verificarSelecoes() {
 // Adiciona o evento de mudança aos selects para chamar a função verificarSelecoes
 document.getElementById('retirada_devolucao').addEventListener('change', verificarSelecoes);
 document.getElementById('cpd_responsavel').addEventListener('change', verificarSelecoes);
-
-
 
