@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -25,6 +26,7 @@
 
 </head>
 <body>
+   
     <!-- Seu conteúdo aqui -->
     <form id="meuFormulario" method="post" action="https://api.sheetmonkey.io/form/3LYYTQDqgosfg2vzMwknPe" autoComplete="on" class="sm__form">
     <div style="text-align: center;">
@@ -33,19 +35,19 @@
         <img src="https://www.cpdverificationservice.com/uploads/1/2/6/8/126857925/cropped-cpd-logo-clear-1.png" alt="Imagem Esquerda" style="width: 50px; vertical-align: middle;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9Yw9zWZgbxvPrO7ZbAKQ2S2hxW4Rm8bz6zzHT4IMdgU7DDrxT1kYdVuabMjpE8jujbRo&usqp=CAU" alt="Imagem Direita" style="width: 80px; vertical-align: middle;">
     </div>
-    
+    <h5 style="margin-top: 0;">COLETOR📝</h5>
 </div>
  
         <div class="sm-branding-footer">
-            <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termos responsabilidade sobre o coletor</a>
+            <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termosresponsabilidade sobre o coletor</a>
         </div>
         <div class="sm__form__fields">
             <fieldset>
-                <legend>Nome Completo: *</legend>
+                <legend>Nome Completo: <span class="asterisco-vermelho"></span></legend>
             <label for="nome_completo"></label>
             <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite seu nome completo aqui"required>
             
-            <label for="setor">Selecione Setor: *</label>
+            <label for="setor">Selecione Setor: <span class="asterisco-vermelho"></span></label>
             <select id="setor" name="setor" required>
                 <option value="">-- Selecione --</option>
                 <option value="Deposito">Deposito</option>
@@ -53,7 +55,7 @@
                 <option value="Prevencao_de_perdas">Prevenção de perdas</option>
             </select>
 
-            <label for="coletor">Selecione numero do coletor: *</label>
+            <label for="coletor">Selecione numero do coletor: <span class="asterisco-vermelho"></span></label>
             <select id="coletor" name="coletor" required>
                 <option value="">-- Selecione --</option>
                 <option value="Coletor01">Coletor- 01</option>
@@ -78,14 +80,14 @@
                 <option value="Coletor20">Coletor- 20</option>
 
             </select>
-            <label for="retirada_devolucao">Retirando ou Devolvendo "coletor"? *</label>
+            <label for="retirada_devolucao">Retirando ou Devolvendo "coletor"? <span class="asterisco-vermelho"></span></label>
             <select id="retirada_devolucao" name="retirada_devolucao" required>
                 <option value="">-- Selecione --</option>
                 <option value="Retirado">Retirando</option>
                 <option value="Devolvido">Devolvendo</option>
             </select>
             
-            <label for="cpd_responsavel">CPD Responsável no local:</label>
+            <label for="cpd_responsavel">CPD Responsável no local: <span class="asterisco-vermelho"></span></label>
             <select id="cpd_responsavel" name="cpd_responsavel" required>
                 <option value="">-- Selecione --</option>
                 <option value="JONILSON DO NASCIMENTO SANTOS">Jonilson Santos</option>
@@ -96,10 +98,9 @@
             </select>
 
               <div id="alertaDevolucao" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;">
-  <strong>Atenção!</strong> Você esta devolvendo coletor sem cpd no local. Por favor, Deixa coletor de baixo da mesa.
+  <strong>Atenção!</strong> Por favor, Deixa coletor de baixo da mesa.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-
 
 
                  
