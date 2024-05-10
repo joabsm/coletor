@@ -247,3 +247,19 @@ select#cpd_responsavel{
     content: "*";
     color: red;
   }
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox-group {
+  flex: 0 0 50%; /* Ajusta para 50% da largura do container */
+}
+
+/* Estilos adicionais para alinhar e melhorar a aparência */
+.checkbox-group label {
+  display: block;
+  margin: 5px 0;
+}
+
