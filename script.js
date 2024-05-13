@@ -209,12 +209,10 @@ doc.text('Data: ' + obterDataAtual(), 20, 225);
 
 
 
-         
-
 });
 
 window.onload = function() {
-    exibirAvisoPorMinuto(); // Chama a função do aviso
+    exibirAvisoDiario(); // Chama a função do aviso
 
     // Seu código existente para verificar e inserir valores salvos
     var nomeCompletoSalvo = localStorage.getItem('nomeCompleto');
@@ -227,20 +225,23 @@ window.onload = function() {
     }
     if (nomeSetorSalvo) {
         document.getElementById('setor').value = nomeSetorSalvo;
+        $('#setor').selectpicker('refresh'); // Atualiza a exibição do Bootstrap Select
         localStorage.removeItem('setor');
     }
     if (nomeCpdResponsavelSalvo) {
         document.getElementById('cpd_responsavel').value = nomeCpdResponsavelSalvo;
+        $('#cpd_responsavel').selectpicker('refresh'); // Atualiza a exibição do Bootstrap Select
         localStorage.removeItem('cpd_responsavel');
     }
 };
 
-function exibirAvisoPorMinuto() {
-    // Sua lógica para exibir o aviso
-    var agora = new Date().getTime();
+
+// Função para exibir o aviso uma vez a cada 24 horas
+    function exibirAvisoDiario() {
+      var agora = new Date().getTime();
       var ultimoAviso = localStorage.getItem('ultimoAviso');
 
-      // Se o último aviso não foi definido ou se já passou um dia, exiba o aviso
+      // Se o último aviso não foi definido ou se já passou 24 horas, exiba o aviso
       if (!ultimoAviso || agora - ultimoAviso >= 24 * 60 * 60 * 1000) {
         Swal.fire({
           title: 'Aviso Importante!',
@@ -252,7 +253,20 @@ function exibirAvisoPorMinuto() {
         // Atualiza o horário do último aviso no localStorage
         localStorage.setItem('ultimoAviso', agora);
       }
-}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
    
         
 function toggleCheckboxes(checkbox) {
@@ -285,3 +299,43 @@ function verificarSelecoes() {
 document.getElementById('retirada_devolucao').addEventListener('change', verificarSelecoes);
 document.getElementById('cpd_responsavel').addEventListener('change', verificarSelecoes);
 
+$(document).ready(function() {
+            $('.selectpicker').selectpicker();
+        });
+
+
+
+ 
+
+ document.getElementById('nome_completo').addEventListener('input', function() {
+            if (this.value.length >= 10) {
+                this.classList.remove('invalid');
+                this.classList.add('valid');
+                document.getElementById('valid-icon').style.display = 'block';
+                document.getElementById('invalid-icon').style.display = 'none';
+            } else {
+                this.classList.remove('valid');
+                this.classList.add('invalid');
+                document.getElementById('valid-icon').style.display = 'none';
+                document.getElementById('invalid-icon').style.display = 'block';
+            }
+        });
+
+$(document).ready(function() {
+            $('.selectpicker').selectpicker();
+
+            // Adicione um ouvinte de evento 'changed.bs.select' a cada select
+            $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+                // Verifique se uma opção foi selecionada
+                if (this.value) {
+                    // Se uma opção foi selecionada, adicione a classe 'valid-select' e remova 'invalid-select'
+                    $(this).parent().addClass('valid-select').removeClass('invalid-select');
+                } else {
+                    // Se nenhuma opção foi selecionada, adicione a classe 'invalid-select' e remova 'valid-select'
+                    $(this).parent().addClass('invalid-select').removeClass('valid-select');
+                }
+            });
+
+            // Acione o evento 'change' em cada select para definir a cor da borda inicial
+            $('.selectpicker').trigger('change');
+        });
