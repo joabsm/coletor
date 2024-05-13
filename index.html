@@ -22,6 +22,12 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+<!-- Inclua o CSS do Bootstrap e do Bootstrap Select aqui -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" rel="stylesheet" />
+
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
 
 
 </head>
@@ -38,28 +44,37 @@
     <h5 style="margin-top: 0;">COLETOR📝</h5>
 </div>
  
-        <div class="sm-branding-footer">
+        <div class="sm-branding-footer" >
             <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termos responsabilidade sobre o coletor</a>
         </div>
-        <div class="sm__form__fields">
+
+        <div class="sm__form__fields" style="position: relative;">
             <fieldset>
                 <legend>Nome Completo: <span class="asterisco-vermelho"></span></legend>
+                 <small id="nomeHelp" class="form-text text-muted">Número mínimo de letras: 10</small>
             <label for="nome_completo"></label>
-            <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite seu nome completo aqui"required>
+            <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite seu nome completo aqui" pattern=".{10,}" required>
+
+            <i class="fas fa-check valid-icon" id="valid-icon"></i>
+            <i class="fas fa-times invalid-icon" id="invalid-icon"></i>
             
+        </div>
+
+            
+    <div class="sm__form__fields">
             <label for="setor">Selecione Setor: <span class="asterisco-vermelho"></span></label>
-            <select id="setor" name="setor" required>
+            <select id="setor" name="setor" class="selectpicker" data-width="100%" required>
                 <option value="">-- Selecione --</option>
                 <option value="Deposito">Deposito</option>
                 <option value="Auditoria">Auditoria</option>
                 <option value="Frios">Frios</option>
                 <option value="Prevencao_de_perdas">Prevenção de perdas</option>
             </select>
-
+       
             <label for="coletor">Selecione numero do coletor: <span class="asterisco-vermelho"></span></label>
-            <select id="coletor" name="coletor" required>
+            <select id="coletor" name="coletor" class="selectpicker" data-width="100%" required>
                 <option value="">-- Selecione --</option>
-                <option value="Coletor01">Coletor- 01</option>
+               <option value="Coletor01">Coletor- 01</option>
                 <option value="Coletor02">Coletor- 02</option>
                 <option value="Coletor03">Coletor- 03</option>
                 <option value="Coletor04">Coletor- 04</option>
@@ -79,21 +94,21 @@
                 <option value="Coletor18">Coletor- 18</option>
                 <option value="Coletor19">Coletor- 19</option>
                 <option value="Coletor20">Coletor- 20</option>
-
             </select>
+
             <label for="retirada_devolucao">Retirando ou Devolvendo "coletor"? <span class="asterisco-vermelho"></span></label>
-            <select id="retirada_devolucao" name="retirada_devolucao" required>
+            <select id="retirada_devolucao" name="retirada_devolucao" class="selectpicker" data-width="100%" required>
                 <option value="">-- Selecione --</option>
                 <option value="Retirado">Retirando</option>
                 <option value="Devolvido">Devolvendo</option>
             </select>
-            
+
             <label for="cpd_responsavel">CPD Responsável no local: <span class="asterisco-vermelho"></span></label>
-            <select id="cpd_responsavel" name="cpd_responsavel" required>
+            <select id="cpd_responsavel" name="cpd_responsavel" class="selectpicker" data-width="100%" required>
                 <option value="">-- Selecione --</option>
                 <option value="JONILSON DO NASCIMENTO SANTOS">Jonilson Santos</option>
                 <option value="MATEUS PEREIRA MAIA">Mateus Maia</option>
-              <option value="JOAB DA SILVA MOTA">Joab Mota</option>
+                <option value="JOAB DA SILVA MOTA">Joab Mota</option>
                 <option value="EDI CARVALHO NOVAES">Edy Carvalho</option>
                 <option value="Sem_cpd">Sem Cpd</option>
             </select>
@@ -107,7 +122,7 @@
                  
              </fieldset>
            <fieldset>
-  <legend>Marque as caixas como Ok:<span class="asterisco-vermelho"></span></legend>
+  <legend>Marque as caixas como Ok: <span class="asterisco-vermelho"></span></legend>
   <div class="checkbox-container">
     <div class="checkbox-group">
       <input type="checkbox" id="select_all" onclick="toggleCheckboxes(this)" />
@@ -138,8 +153,8 @@
       <label for="alça">Alça</label>
     </div>
   </div>
-</fieldset>
-        </div>
+  </fieldset>
+</div>
        
         <div class="sm-actions__container">
     <a href="https://joabsm.github.io/suportecpd/" class="sm-btn sm-btn--support"><i class="fa-solid fa-house fa-beat-fade" style="color: #f3f4f7;"></i> Suporte</a>
@@ -149,6 +164,11 @@
         
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+     <!-- Inclua o jQuery, o JS do Bootstrap e do Bootstrap Select aqui -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 
 
 <script src="script.js"></script>
