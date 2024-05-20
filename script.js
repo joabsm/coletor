@@ -347,3 +347,60 @@ $(document).ready(function() {
             // Acione o evento 'change' em cada select para definir a cor da borda inicial
             $('.selectpicker').trigger('change');
         });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const coletorSelect = document.getElementById('coletor');
+  const retiradaDevolucaoSelect = document.getElementById('retirada_devolucao');
+
+  // Verifica o estado do coletor no LocalStorage ao carregar a página
+  function verificarEstadoColetor() {
+    const savedStatus = localStorage.getItem('coletorStatus');
+    if (savedStatus) {
+      const status = JSON.parse(savedStatus);
+      const currentTime = Date.now();
+      const timeElapsed = currentTime - status.timestamp;
+
+      // Se o tempo desde a última ação for menor que 5 minutos, impede a ação repetida para o mesmo coletor
+      if (timeElapsed < 30 * 1000) {
+        
+        // Impede a seleção do coletor com ação recente
+        const options = coletorSelect.options;
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === status.coletor) {
+            options[i].disabled = true;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  verificarEstadoColetor();
+
+  retiradaDevolucaoSelect.addEventListener('change', (event) => {
+    const acao = event.target.value;
+    const coletor = coletorSelect.value;
+
+    // Atualiza o estado no LocalStorage
+    localStorage.setItem('coletorStatus', JSON.stringify({
+      coletor,
+      acao,
+      timestamp: Date.now()
+    }));
+
+    // Reativa todos os coletores após a seleção
+    const options = coletorSelect.options;
+    for (let i = 0; i < options.length; i++) {
+      options[i].disabled = false;
+    }
+
+    // Desativa o coletor por 5 minutos após a ação
+    setTimeout(() => {
+      const status = JSON.parse(localStorage.getItem('coletorStatus'));
+      if (status && status.coletor === coletor && status.acao === acao) {
+        localStorage.removeItem('coletorStatus');
+        options[coletorSelect.selectedIndex].disabled = false;
+      }
+    }, 30 * 1000);
+  });
+});
