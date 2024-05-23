@@ -1,5 +1,8 @@
+
 document.getElementById('meuFormulario').addEventListener('submit', function(e) {
             e.preventDefault();
+
+
     var checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
     var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
 
@@ -243,30 +246,27 @@ window.onload = function() {
 
       // Se o último aviso não foi definido ou se já passou 24 horas, exiba o aviso
       if (!ultimoAviso || agora - ultimoAviso >= 24 * 60 * 60 * 1000) {
-        Swal.fire({
-          title: 'Aviso Importante!',
-          text: 'Por favor, preencha o formulário na retirada e na devolução do coletor.',
-          icon: 'info',
-          confirmButtonText: 'Ok'
-        });
+    const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: true,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+  toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "info",
+  title: 'Aviso Importante!',
+text: 'Por favor, preencha o formulário na retirada e na devolução do coletor.',
+});
 
         // Atualiza o horário do último aviso no localStorage
         localStorage.setItem('ultimoAviso', agora);
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
    
         
 function toggleCheckboxes(checkbox) {
@@ -404,3 +404,99 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }, 30 * 1000);
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const setorSelect = document.getElementById('setor');
+  const coletorSelect = document.getElementById('coletor');
+  const retiradaDevolucaoSelect = document.getElementById('retirada_devolucao');
+ const nome_completoS = document.getElementById('nome_completo');
+
+  function verificarCondicões() {
+    const setor = setorSelect.value;
+    const retiradaDevolucao = retiradaDevolucaoSelect.value;
+    const coletorValue = coletorSelect.value;
+    const nome_completo = nome_completoS.value;
+    const coletorNumber = coletorValue.match(/\d+/) ? parseInt(coletorValue.match(/\d+/)[0]) : null;
+
+    // Verificar se as condições para Frios, Auditoria ou Prevenção de perdas são atendidas
+    if (retiradaDevolucao === 'Retirado' && 
+        (setor === 'Frios' || setor === 'Auditoria' || setor === 'Prevencao_de_perdas') &&
+        coletorNumber && coletorNumber >= 1 && coletorNumber <= 9 ) {
+  const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  title: '⚠️ Atenção!',
+  text: ` Este Coletor-${coletorNumber.toString().padStart(2, '0')} é destinado para setor do "Deposito"`,
+  icon: 'warning',
+});
+    }
+    
+    // Verificar se as condições para Deposito são atendidas
+    if (retiradaDevolucao === 'Retirado' && 
+        setor === 'Deposito' &&
+        coletorNumber && coletorNumber >= 9 && coletorNumber <= 20) {
+      const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  title: '⚠️ Atenção!',
+  text: ` Este Coletor-${coletorNumber.toString().padStart(2, '0')} é destinado para setor do "Frios","Auditoria", "Prevencao_de_perdas"`,
+  icon: 'warning',
+});
+    }
+   
+    // Verificar se as condições para Frios, Auditoria ou Prevenção de perdas são atendidas
+    if (retiradaDevolucao === 'Devolvido' && 
+        (setor === 'Frios' || setor === 'Auditoria' || setor === 'Prevencao_de_perdas' || setor === 'Deposito') &&
+        coletorNumber && coletorNumber >= 1 && coletorNumber <= 20) {
+  const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  title: `${nome_completo}`,
+  text: ` Confere na etiqueta do coletor se realmente é este Numero ${coletorNumber.toString().padStart(2, '0')} do coletor🔎`,
+  icon: 'info',
+});
+    }
+
+
+
+  }
+
+  // Adicionar ouvintes de evento para todos os selects
+  setorSelect.addEventListener('change', verificarCondicões);
+  coletorSelect.addEventListener('change', verificarCondicões);
+  retiradaDevolucaoSelect.addEventListener('change', verificarCondicões);
+});
+
+
+
+
+
+
+
