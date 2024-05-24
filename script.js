@@ -469,8 +469,8 @@ Toast.fire({
   const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
-  showConfirmButton: false,
-  timer: 4000,
+  showConfirmButton: true,
+  timer: 5000,
   timerProgressBar: true,
   didOpen: (toast) => {
     toast.onmouseenter = Swal.stopTimer;
@@ -479,7 +479,7 @@ Toast.fire({
 });
 Toast.fire({
   title: `${nome_completo}`,
-  text: `Antes de finalizar a devolução, confirme se o número do coletor está correto." Coletor- ${coletorNumber.toString().padStart(2, '0')} " `,
+  text: `Antes de finalizar a devolução, confirme se o número do coletor está correto."      >Coletor- ${coletorNumber.toString().padStart(2, '0')} " `,
   icon: 'info',
 });
     }
