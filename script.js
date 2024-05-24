@@ -479,7 +479,7 @@ Toast.fire({
 });
 Toast.fire({
   title: `${nome_completo}`,
-  text: ` Confere na etiqueta do coletor se realmente é este Numero ${coletorNumber.toString().padStart(2, '0')} do coletor🔎`,
+  text: `Antes de finalizar a devolução, confirme se o número do coletor está correto." Coletor- ${coletorNumber.toString().padStart(2, '0')} " `,
   icon: 'info',
 });
     }
