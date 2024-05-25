@@ -216,6 +216,7 @@ doc.text('Data: ' + obterDataAtual(), 20, 225);
 
 window.onload = function() {
     exibirAvisoDiario(); // Chama a função do aviso
+    exibirNotificasao(); // Chama a função da notificação
 
     // Seu código existente para verificar e inserir valores salvos
     var nomeCompletoSalvo = localStorage.getItem('nomeCompleto');
@@ -224,7 +225,7 @@ window.onload = function() {
 
     if (nomeCompletoSalvo) {
         document.getElementById('nome_completo').value = nomeCompletoSalvo;
-        localStorage.removeItem('nomeCompleto');
+        
     }
     if (nomeSetorSalvo) {
         document.getElementById('setor').value = nomeSetorSalvo;
@@ -243,6 +244,7 @@ window.onload = function() {
     function exibirAvisoDiario() {
       var agora = new Date().getTime();
       var ultimoAviso = localStorage.getItem('ultimoAviso');
+     
 
       // Se o último aviso não foi definido ou se já passou 24 horas, exiba o aviso
       if (!ultimoAviso || agora - ultimoAviso >= 24 * 60 * 60 * 1000) {
@@ -262,6 +264,28 @@ Toast.fire({
   title: 'Aviso Importante!',
 text: 'Por favor, preencha o formulário na retirada e na devolução do coletor.',
 });
+
+        // Atualiza o horário do último aviso no localStorage
+        localStorage.setItem('ultimoAviso', agora);
+      }
+    }
+
+    function exibirNotificasao() {
+      var agora = new Date().getTime();
+      var ultimoAviso = localStorage.getItem('ultimoAviso');
+       var nomeSalvo = localStorage.getItem('nomeCompleto');
+
+      // Se o último aviso não foi definido ou se já passou 24 horas, exiba o aviso
+      if (!ultimoAviso || agora - ultimoAviso >= 20 * 1000) {
+    iziToast.show({
+        backgroundColor: '#D3D3D3',
+        messageColor: '#000000',
+        transitionIn: 'bounceInDown',
+                    image: 'https://www.cpdverificationservice.com/uploads/1/2/6/8/126857925/cropped-cpd-logo-clear-1.png',
+                    position: 'topRight',
+                    title: 'Olá!',
+                    message: `Seja bem-vindo de volta, ${nomeSalvo}!`
+                });
 
         // Atualiza o horário do último aviso no localStorage
         localStorage.setItem('ultimoAviso', agora);
@@ -493,10 +517,3 @@ Toast.fire({
   coletorSelect.addEventListener('change', verificarCondicões);
   retiradaDevolucaoSelect.addEventListener('change', verificarCondicões);
 });
-
-
-
-
-
-
-
