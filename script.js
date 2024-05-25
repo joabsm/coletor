@@ -276,7 +276,7 @@ text: 'Por favor, preencha o formulário na retirada e na devolução do coletor
        var nomeSalvo = localStorage.getItem('nomeCompleto');
 
       // Se o último aviso não foi definido ou se já passou 24 horas, exiba o aviso
-      if (!ultimoAviso || agora - ultimoAviso >= 20 * 1000) {
+      if (!ultimoAviso || agora - ultimoAviso >= 60 * 1000) {
     iziToast.show({
         backgroundColor: '#D3D3D3',
         messageColor: '#000000',
