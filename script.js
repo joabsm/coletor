@@ -230,7 +230,7 @@ window.onload = function() {
     if (nomeSetorSalvo) {
         document.getElementById('setor').value = nomeSetorSalvo;
         $('#setor').selectpicker('refresh'); // Atualiza a exibição do Bootstrap Select
-        localStorage.removeItem('setor');
+        
     }
     if (nomeCpdResponsavelSalvo) {
         document.getElementById('cpd_responsavel').value = nomeCpdResponsavelSalvo;
@@ -277,14 +277,14 @@ text: 'Por favor, preencha o formulário na retirada e na devolução do coletor
 
       // Se o último aviso não foi definido ou se já passou 24 horas, exiba o aviso
       if (!ultimoAviso || agora - ultimoAviso >= 60 * 1000) {
-    iziToast.show({
-        backgroundColor: '#D3D3D3',
-        messageColor: '#000000',
-        transitionIn: 'bounceInDown',
+    iziToast.success({
+                    
+                    messageColor: '#000000',
+                    transitionIn: 'bounceInDown',
                     image: 'https://www.cpdverificationservice.com/uploads/1/2/6/8/126857925/cropped-cpd-logo-clear-1.png',
                     position: 'topRight',
-                    title: 'Olá!',
-                    message: `Seja bem-vindo de volta, ${nomeSalvo}!`
+                    title: 'Seus dados foram salvo com sucesso,',
+                    message: `${nomeSalvo} ➡️ Setor: ${setorSalvo}!`
                 });
 
         // Atualiza o horário do último aviso no localStorage
