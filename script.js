@@ -251,7 +251,7 @@ window.onload = function() {
     const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
-  showConfirmButton: true,
+  showConfirmButton: false,
   timer: 4000,
   timerProgressBar: true,
   didOpen: (toast) => {
@@ -493,7 +493,7 @@ Toast.fire({
   const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
-  showConfirmButton: true,
+  showConfirmButton: false,
   timer: 5000,
   timerProgressBar: true,
   didOpen: (toast) => {
