@@ -129,9 +129,16 @@
 
         }
 
+        .sm-btn--primary {
+
+            margin-bottom: 20px;
+
+        }
+
         .sm-btn--support {
 
     background-color: #28a745; /* Cor de fundo para o botão de suporte */
+    margin-bottom: 20px;
 
 }
 
@@ -244,12 +251,13 @@
             padding-right: 30px;
         }
 
-
-
-
          .valid-select .btn-light {
             border: 1px solid green;
         }
         .invalid-select .btn-light {
             border: 1px solid red;
+        }
+           .versao {
+            
+           position: absolute;
         }
