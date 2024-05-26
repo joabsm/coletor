@@ -274,6 +274,7 @@ text: 'Por favor, preencha o formulário na retirada e na devolução do coletor
       var agora = new Date().getTime();
       var ultimoAviso = localStorage.getItem('ultimoAviso');
        var nomeSalvo = localStorage.getItem('nomeCompleto');
+      var setorSalvo = localStorage.getItem('setor');
 
       // Se o último aviso não foi definido ou se já passou 24 horas, exiba o aviso
       if (!ultimoAviso || agora - ultimoAviso >= 60 * 1000) {
