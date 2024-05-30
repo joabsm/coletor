@@ -29,13 +29,13 @@
 
             margin: 0;
 
-            padding: 0;
+            padding-top: 40px; /* Ajuste conforme necessário */
 
         }
 
 
 
-        header, nav, main, aside, footer {
+        header, main, aside, footer {
 
             padding: 20px;
 
@@ -261,3 +261,35 @@
             
            position: absolute;
         }
+
+         .profile-picture {
+        position: relative; /* Define o contexto de posicionamento */
+        width: 40px;
+        height: 40px;
+        border-radius: 50%; /* Torna a imagem redonda */
+        background-image: url('https://www.cpdverificationservice.com/uploads/1/2/6/8/126857925/cropped-cpd-logo-clear-1.png'); /* Substitua pelo caminho da sua imagem */
+        background-size: cover;
+        background-position: center;
+    }
+
+   .navbar-brand {
+         position: absolute;
+        top: 13px;
+        left: 55px;
+        
+         
+    }
+
+ table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr {
+            background-color: #c8e6c9; /* Substitua pela cor desejada */
+        }
+
