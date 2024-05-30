@@ -40,6 +40,27 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
         showConfirmButton: false,
         timer: 2000
     });
+
+// Obtém os valores dos campos do formulário
+            
+            var retiradaDevolucao = document.getElementById('retirada_devolucao').value;
+           
+            var coletor = document.getElementById('coletor').value;
+
+            // Crie um objeto com os dados do formulário
+            var pegaFormulario = {
+                coletor,
+                retiradaDevolucao,
+                 datetime
+                
+            };
+
+            // Salva os dados no LocalStorage
+            localStorage.setItem('pegaFormulario', JSON.stringify(pegaFormulario));
+
+
+
+
             var nomeCompleto = document.getElementById('nome_completo').value;
     localStorage.setItem('nomeCompleto', nomeCompleto);
 
@@ -520,3 +541,36 @@ Toast.fire({
   coletorSelect.addEventListener('change', verificarCondicões);
   retiradaDevolucaoSelect.addEventListener('change', verificarCondicões);
 });
+
+// Exibe os dados em uma tabela quando o botão for clicado
+        const botaoExibirTabela = document.getElementById('exibirTabela');
+        const tabelaDados = document.getElementById('tabelaDados');
+
+        //Caso queira exibir tabela apenas se clicar no butao
+        //botaoExibirTabela.addEventListener('click', function() {
+        const dadosSalvos = localStorage.getItem('pegaFormulario');
+        if (dadosSalvos) {
+            const dados = JSON.parse(dadosSalvos);
+            const tabelaBody = document.querySelector('#tabelaDados tbody');
+            
+            
+            // Crie uma nova linha na tabela para cada conjunto de dados
+            const novaLinha = document.createElement('tr');
+            novaLinha.innerHTML = `
+               
+                <td>${dados.coletor}</td>
+                <td>${dados.retiradaDevolucao}</td>
+                <td>${dados.datetime}</td>
+            `;
+
+            
+
+            tabelaBody.appendChild(novaLinha);
+
+        } else {
+            alert('Nenhum dado salvo ainda.');
+        }
+   // });
+
+        var clienteSalvo = localStorage.getItem('nomeCompleto');
+    document.getElementById('nomeCliente').textContent = clienteSalvo || 'Cliente'; // Se não houver nome salvo, exibe "Cliente"
