@@ -27,36 +27,36 @@
 
 
 </head>
-<body>
+<body class="p-3 m-0 border-0 bd-example">
 
      <nav class="navbar bg-body-tertiary fixed-top" style="background-color: #e3f2fd;">
-  <div class="container-fluid">
+      <div class="container-fluid">
 
-     <div class="profile-picture">
-    <!-- Foto do perfil redonda -->
+       <div class="profile-picture">
+       <!-- Foto do perfil redonda -->
     
-</div>
- <a class="navbar-brand" href="#">FORMULARIO</a>
+       </div>
+        <a class="navbar-brand" href="#">FORMULARIO</a>
 
    
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Ola, <span id="nomeCliente"></span></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
+      </button>
+     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Ola, <span id="nomeCliente"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
-<button id="exibirTabela" class="sm-btn sm-btn--support" type="button"> <i class="fas fa-table"></i> Historico Retirada/Devolução </button>
-<table id="tabelaDados">
-    <thead>
-        <tr>
+           <button id="exibirTabela" class="sm-btn sm-btn--support" type="button"> <i class="fas fa-table"></i> Historico Retirada/Devolução </button>
+             <table id="tabelaDados">
+              <thead>
+            <tr>
 
-            <th>Coletor</th>
-            <th>Status</th>
+             <th>Coletor</th>
+             <th>Status</th>
              <th>Data</th>
             
             
@@ -74,51 +74,44 @@
 </nav>
    
     <!-- Seu conteúdo aqui -->
-    <form id="meuFormulario" method="post" action="https://api.sheetmonkey.io/form/3LYYTQDqgosfg2vzMwknPe" autoComplete="on" class="sm__form">
+    <form id="meuFormulario" method="post" action="https://api.sheetmonkey.io/form/3LYYTQDqgosfg2vzMwknPe" autoComplete="on" class="row g-3 needs-validation was-validated" >
 
-   
- 
-        <div class="sm-branding-footer" >
+    <div class="sm-branding-footer" >
             <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termos responsabilidade sobre o coletor</a>
-        </div>
+    </div>
 
-        <div class="sm__form__fields" style="position: relative;">
-            <fieldset>
-                <legend>Nome Completo: <span class="asterisco-vermelho"></span></legend>
-                 <small id="nomeHelp" class="form-text text-muted">Número mínimo de letras: 10</small>
-            <label for="nome_completo"></label>
-            <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite seu nome completo aqui" pattern=".{10,}" required>
+        
 
-            <!-- Adicione os ícones aqui -->
-<i class="fas fa-check-circle valid-icon" id="valid-icon"></i>
-<i class="fas fa-times-circle invalid-icon" id="invalid-icon"></i>
-
-            
-        </div>
+         <div class="col-md-4">
+        <label for="nome_completo" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nome Completo:</font></font><span class="asterisco-vermelho"></span></label>
+        <input type="text" class="form-control" id="nome_completo" placeholder="Digite seu nome completo aqui" name="nome_completo" required="">
+      </div>
 
       
-    <div class="sm__form__fields">
+         <div class="col-md-4">
+          <label for="retirada_devolucao">Retirando ou Devolvendo "coletor"? <span class="asterisco-vermelho"></span></label>
+          <select id="retirada_devolucao" name="retirada_devolucao" class="form-select" data-width="100%" required>
+          <option value="">-- Selecione --</option>         
+          <option value="Retirado" style="color: red;">➡️ Retirar Coletor</option>              
+          <option value="Devolvido" style="color: green;">➡️ Devolver Coletor</option>
+          </select>
+         </div>
 
-         <label for="retirada_devolucao">Retirando ou Devolvendo "coletor"? <span class="asterisco-vermelho"></span></label>
-            <select id="retirada_devolucao" name="retirada_devolucao" class="selectpicker" data-width="100%" required>
-    <option value="">-- Selecione --</option>
-                
-    <option value="Retirado" style="color: red;">➡️ Retirar Coletor</option>
-                
-    <option value="Devolvido" style="color: green;">➡️ Devolver Coletor</option>
-</select>
-            
+             
+            <div class="col-md-4">
             <label for="setor">Selecione Setor: <span class="asterisco-vermelho"></span></label>
-            <select id="setor" name="setor" class="selectpicker" data-width="100%" required>
+            <select id="setor" name="setor" class="form-select"  data-width="100%" required>
                 <option value="">-- Selecione --</option>
                 <option value="Deposito">Deposito</option>
                 <option value="Auditoria">Auditoria</option>
                 <option value="Frios">Frios</option>
                 <option value="Prevencao_de_perdas">Prevenção de perdas</option>
             </select>
-       
+            </div>
+
+            <div class="col-md-6">
             <label for="coletor">Selecione numero do coletor: <span class="asterisco-vermelho"></span></label>
-            <select id="coletor" name="coletor" class="selectpicker" data-width="100%" required>
+            <select id="coletor" name="coletor" class="form-select" data-width="100%" required>
                 <option value="">-- Selecione --</option>
                <option value="Coletor01">Coletor- 01</option>
                 <option value="Coletor02">Coletor- 02</option>
@@ -135,15 +128,13 @@
                 <option value="Coletor13">Coletor- 13</option>
                 <option value="Coletor14">Coletor- 14</option>
                 <option value="Coletor15">Coletor- 15</option>
-                <option value="Coletor16">Coletor- 16</option>
-               
-                
+                <option value="Coletor16">Coletor- 16</option>      
             </select>
-
+            </div>
            
-
+             <div class="col-md-3">
             <label for="cpd_responsavel">CPD Responsável no local: <span class="asterisco-vermelho"></span></label>
-            <select id="cpd_responsavel" name="cpd_responsavel" class="selectpicker" data-width="100%" required>
+            <select id="cpd_responsavel" name="cpd_responsavel" class="form-select" data-width="100%" required>
                 <option value="">-- Selecione --</option>
                 <option value="JONILSON DO NASCIMENTO SANTOS">Jonilson Santos</option>
                 <option value="MATEUS PEREIRA MAIA">Mateus Maia</option>
@@ -151,6 +142,7 @@
                 <option value="EDI CARVALHO NOVAES">Edy Carvalho</option>
                 <option value="Sem_cpd">Sem Cpd</option>
             </select>
+            </div>
 
               <div id="alertaDevolucao" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;">
   <strong>Atenção!</strong> Por favor, Deixa coletor de baixo da mesa.
@@ -159,12 +151,11 @@
 
 
                  
-             </fieldset>
-           <fieldset>
+        <div class="col-12">     
   <legend>Marque as caixas como Ok: <span class="asterisco-vermelho"></span></legend>
   <div class="checkbox-container">
     <div class="checkbox-group">
-      <input type="checkbox" id="select_all" onclick="toggleCheckboxes(this)" />
+      <input  type="checkbox" id="select_all" onclick="toggleCheckboxes(this)" />
       <label for="select_all"><strong>Marcar Todas</strong></label>
     </div>
     <div class="checkbox-group">
@@ -192,17 +183,40 @@
       <label for="alça">Alça</label>
     </div>
   </div>
-  </fieldset>
-</div>
+  </div>
+ 
 
+
+ <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+          <label class="form-check-label" for="invalidCheck"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            Concorde com os termos e condições
+          </font></font></label>
+          <div class="invalid-feedback"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            <a href="https://joabsm.github.io/termos/" >Ler termos</a>
+          </font></font></div>
+        </div>
+      </div>
        
         <div class="sm-actions__container">
-    <a href="https://joabsm.github.io/suportecpd/" class="sm-btn sm-btn--support"><i class="fa-solid fa-house fa-beat-fade" style="color: #f3f4f7;"></i> Suporte</a>
+    
     <button type="submit" class="sm-btn sm-btn--primary"><i class="fa-solid fa-play fa-beat-fade" style="color: #f6f7f9;"></i>  Enviar formulário</button>
+
 </div>
-<div class="versao">
-        <span>v1.4.0/Joabsm</span>
+
+<div style="display: inline-block;">
+        <img src="img/logo2.jpeg" alt="Imagem Esquerda" style="width: 30px; vertical-align: middle;">
+        © 2024–2024 joab form
     </div>
+    
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Privacidade</font></font></a></li>
+      <li class="list-inline-item"><a href="https://joabsm.github.io/termos/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Termos</font></font></a></li>
+      <li class="list-inline-item"><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Apoiar</font></font></a></li>
+    </ul>
+ 
+
     </form>
     
      <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
