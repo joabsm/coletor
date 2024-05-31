@@ -25,11 +25,10 @@
 
             font-family: Arial, sans-serif;
 
-            background-color: #4682B4;
-
+            
             margin: 0;
 
-            padding-top: 40px; /* Ajuste conforme necessário */
+            padding-top: 50px; /* Ajuste conforme necessário */
 
         }
 
@@ -97,7 +96,7 @@
 
             display: flex;
 
-            justify-content: space-between;
+        
 
         }
 
@@ -132,6 +131,8 @@
         .sm-btn--primary {
 
             margin-bottom: 20px;
+           width: 100%;
+            
 
         }
 
@@ -139,6 +140,7 @@
 
     background-color: #28a745; /* Cor de fundo para o botão de suporte */
     margin-bottom: 20px;
+    width: 100%;
 
 }
 
@@ -233,19 +235,8 @@
         input:focus {
             border: 2px solid black;
         }
-        /* Estilos para os ícones */
-        .valid-icon, .invalid-icon {
-            position: absolute;
-            right: 10px;
-            top: calc(65% - 0.01em); /* Centraliza verticalmente o ícone */
-            display: none;
-        }
-        .valid-icon {
-            color: green;
-        }
-        .invalid-icon {
-            color: red;
-        }
+       
+        
         /* Adicione um padding ao campo de entrada para evitar que o texto se sobreponha ao ícone */
         input {
             padding-right: 30px;
@@ -285,11 +276,20 @@
             width: 100%;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid #000000;
             padding: 8px;
             text-align: left;
         }
         tr {
-            background-color: #c8e6c9; /* Substitua pela cor desejada */
+            background-color: #F0FFFF; /* Substitua pela cor desejada */
         }
 
+/* Estilos para as cores */
+        .devolvido {
+            color: green;
+        }
+        .retirado {
+            color: red;
+        }
+
+       
