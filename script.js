@@ -252,12 +252,11 @@ window.onload = function() {
     }
     if (nomeSetorSalvo) {
         document.getElementById('setor').value = nomeSetorSalvo;
-        $('#setor').selectpicker('refresh'); // Atualiza a exibição do Bootstrap Select
-        
+       
     }
     if (nomeCpdResponsavelSalvo) {
         document.getElementById('cpd_responsavel').value = nomeCpdResponsavelSalvo;
-        $('#cpd_responsavel').selectpicker('refresh'); // Atualiza a exibição do Bootstrap Select
+        
         localStorage.removeItem('cpd_responsavel');
     }
 };
@@ -355,46 +354,8 @@ $(document).ready(function() {
 
  
 
- document.getElementById('nome_completo').addEventListener('input', function() {
-    // Verifique se o usuário começou a digitar no campo
-    if (this.value.length > 0) {
-        // Se o usuário começou a digitar, verifique o comprimento do valor
-        if (this.value.length >= 10) {
-            this.style.borderColor = 'green';
-            document.getElementById('valid-icon').style.display = 'inline';
-            document.getElementById('invalid-icon').style.display = 'none';
-        } else {
-            this.style.borderColor = 'red';
-            document.getElementById('valid-icon').style.display = 'none';
-            document.getElementById('invalid-icon').style.display = 'inline';
-        }
-    } else {
-        // Se o usuário ainda não começou a digitar, remova a cor da borda e oculte ambos os ícones
-        this.style.borderColor = '';
-        document.getElementById('valid-icon').style.display = 'none';
-        document.getElementById('invalid-icon').style.display = 'none';
-    }
-});
 
 
-$(document).ready(function() {
-            $('.selectpicker').selectpicker();
-
-            // Adicione um ouvinte de evento 'changed.bs.select' a cada select
-            $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-                // Verifique se uma opção foi selecionada
-                if (this.value) {
-                    // Se uma opção foi selecionada, adicione a classe 'valid-select' e remova 'invalid-select'
-                    $(this).parent().addClass('valid-select').removeClass('invalid-select');
-                } else {
-                    // Se nenhuma opção foi selecionada, adicione a classe 'invalid-select' e remova 'valid-select'
-                    $(this).parent().addClass('invalid-select').removeClass('valid-select');
-                }
-            });
-
-            // Acione o evento 'change' em cada select para definir a cor da borda inicial
-            $('.selectpicker').trigger('change');
-        });
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const coletorSelect = document.getElementById('coletor');
@@ -559,7 +520,7 @@ Toast.fire({
             novaLinha.innerHTML = `
                
                 <td>${dados.coletor}</td>
-                <td>${dados.retiradaDevolucao}</td>
+                <td class="${dados.retiradaDevolucao === 'Devolvido' ? 'devolvido' : 'retirado'}">${dados.retiradaDevolucao}</td>
                 <td>${dados.datetime}</td>
             `;
 
@@ -568,7 +529,7 @@ Toast.fire({
             tabelaBody.appendChild(novaLinha);
 
         } else {
-            
+            alert('Nenhum dado salvo ainda.');
         }
    // });
 
