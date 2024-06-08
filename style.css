@@ -44,22 +44,15 @@
 
 
 
-        .row {
-
-            background-color: #F0F8FF;
+       .row {
 
             padding: 20px;
-
-            border-radius: 5px;
-
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra */
 
             max-width: 1000px;
 
             margin: 20px auto;
 
         }
-
 
 
         .sm__form__fields label {
