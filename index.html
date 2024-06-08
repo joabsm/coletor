@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
 
     
-    
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
@@ -48,12 +47,27 @@
            <img src="logo5.png" alt="Minha Logo" style="height: 30px; margin-right: 8px;">
           <span id="nomeCliente"></span>
           </h5>
+
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+<div class="offcanvas-header">
+     <button id="exibirTabela" class="sm-btn sm-btn--support" type="button"> <i class="fas fa-table"></i> Historico Retirada/Devolução </button>
+         </div>
+        <div class="offcanvas-header">
+            
+           <div style="display: flex; justify-content: space-between; width: 100%;">
+        <button id="limparHistorico" class="btn limparHistorico">
+            <i class="fas fa-trash-alt"></i> Limpar Histórico
+        </button>
+        <button id="gerarRelatorio" class="btn gerarRelatorio">
+            <i class="fas fa-file-alt"></i> Gerar Relatório
+        </button>
+    </div>
+            </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
-           <button id="exibirTabela" class="sm-btn sm-btn--support" type="button"> <i class="fas fa-table"></i> Historico Retirada/Devolução </button>
+              <div class="table-wrapper">
              <table id="tabelaDados" border="1">
               <thead>
             <tr>
@@ -69,6 +83,7 @@
         <!-- Aqui você exibirá os dados do formulário -->
     </tbody>
 </table>
+ </div>
         </ul>
         
       </div>
@@ -79,9 +94,7 @@
     <!-- Seu conteúdo aqui -->
     <form id="meuFormulario" method="post" action="https://api.sheetmonkey.io/form/3LYYTQDqgosfg2vzMwknPe" autoComplete="on" class="row g-3 needs-validation was-validated" >
 
-    <div class="sm-branding-footer" >
-            <a href="https://joabsm.github.io/termos/" target="_blank">⚠️ Ler termos responsabilidade sobre o coletor</a>
-    </div>
+    
 
         
 
@@ -202,14 +215,14 @@
         </div>
       </div>
        
-        <div class="sm-actions__container">
+        <div class="containerSubmit">
     
     <button type="submit" class="sm-btn sm-btn--primary"><i class="fa-solid fa-play fa-beat-fade" style="color: #f6f7f9;"></i>  Enviar formulário</button>
 
 </div>
 
 <div style="display: inline-block;">
-        <img src="logo3.png" alt="Imagem Esquerda" style="width: 20px; vertical-align: middle;">
+        <img src="4 joab fo" alt="Imagem Esquerda" style="width: 20px; vertical-align: middle;">
         © 2024–2024 joab form
     </div>
     
@@ -232,7 +245,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
 
 <script src="script.js"></script>
